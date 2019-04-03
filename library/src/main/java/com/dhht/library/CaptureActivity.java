@@ -62,6 +62,7 @@ public final class CaptureActivity extends Activity implements
 
     private static final int REQUEST_CODE = 100;
 
+
     private static final int PARSE_BARCODE_FAIL = 300;
     private static final int PARSE_BARCODE_SUC = 200;
     public static final int SET_VIEW = 400;
@@ -108,8 +109,9 @@ public final class CaptureActivity extends Activity implements
      * 快递单号
      */
     private TextView tv_scanStr;
-
     private TextView tv_btn_manual;
+    private RelativeLayout topbar;
+
 
     /**
      * 【辅助解码的参数(用作MultiFormatReader的参数)】 编码类型，该参数告诉扫描器采用何种编码方式解码，即EAN-13，QR
@@ -212,7 +214,10 @@ public final class CaptureActivity extends Activity implements
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
         ambientLightManager = new AmbientLightManager(this);
-
+        topbar = findViewById(R.id.topbar);
+        if (topbarColor != 0) {
+            topbar.setBackgroundColor(topbarColor);
+        }
         // 监听图片识别按钮
 //		findViewById(R.id.capture_scan_photo).setOnClickListener(this);
 
@@ -645,6 +650,7 @@ public final class CaptureActivity extends Activity implements
     static Class<?> manualActivity;
     static Class<?> backActivity;
     private static String codeMsg;
+    private static int topbarColor;
 
     public static void setScannerResultActivity(Class<?> scannerResultActivity) {
         CaptureActivity.scannerResultActivity = scannerResultActivity;
@@ -656,6 +662,10 @@ public final class CaptureActivity extends Activity implements
 
     public static void setBackActivity(Class<?> backActivity) {
         CaptureActivity.backActivity = backActivity;
+    }
+
+    public static void setTopbarColor(int topbarColor) {
+        CaptureActivity.topbarColor = topbarColor;
     }
 
     public static String getCodeMsg() {

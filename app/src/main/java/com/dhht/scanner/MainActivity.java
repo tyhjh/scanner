@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         CaptureActivity.setBackActivity(MainActivity.class);
         CaptureActivity.setScannerResultActivity(MainActivity.class);
         CaptureActivity.setManualActivity(MainActivity.class);
+        CaptureActivity.setTopbarColor(getColor(R.color.colorPrimary));
 
         requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
         tvHello = findViewById(R.id.tvHello);
