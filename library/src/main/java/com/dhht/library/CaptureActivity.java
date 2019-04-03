@@ -349,9 +349,6 @@ public final class CaptureActivity extends Activity implements
     @Override
     protected void onDestroy() {
         inactivityTimer.shutdown();
-        scannerResultActivity = null;
-        manualActivity = null;
-        backActivity = null;
         super.onDestroy();
     }
 
