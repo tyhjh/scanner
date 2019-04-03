@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="titlebar_bg">#444444</color>
+    <color name="white">#ffffff</color>
+    <color name="gray_text">#797979</color>
+    <color name="button_color_red">#f86964</color>
+    <color name="text_normal">#000000</color>
+    <color name="text_current">#000000</color>
+    <color name="statu_bar_bg">#6fa3f8</color>
+    <color name="viewfinder_mask">#7a000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffbd21</color>
+    <color name="yellow">#ffff00</color>
+    <color name="main_alpha">#55003361</color>
+    <color name="blue_work">#2b65b1</color>
+    <color name="white_alpha">#bbffffff</color>
+    <color name="titlebar">#fd0ab5ed</color>
+    <color name="gray_text_company">#dfd9d8d8</color>
+    <color name="gray_text_background">#DF8C8C8C</color>
+    <color name="textView_color">#FF1FB0E1</color>
+    <color name="textView_green">#FF16F40A</color>
+    <color name="statusBarColor">#ed5ff2</color>
+</resources>

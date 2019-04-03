@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">library</string>
+    <string name="msg_camera_framework_bug">抱歉，Android相机权限尚未开启。您可能需要去开启权限。</string>
+    <string name="button_ok">确定</string>
+</resources>
