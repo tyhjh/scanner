@@ -349,6 +349,7 @@ public final class CaptureActivity extends Activity implements
     @Override
     protected void onDestroy() {
         inactivityTimer.shutdown();
+        instence=null;
         super.onDestroy();
     }
 
@@ -673,4 +674,7 @@ public final class CaptureActivity extends Activity implements
     public void onBackPressed() {
         toBack();
     }
+
+
+
 }
