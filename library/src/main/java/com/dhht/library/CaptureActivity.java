@@ -199,12 +199,14 @@ public final class CaptureActivity extends Activity implements
 
     public void onResult(String s) {
         codeMsg = s;
-        gotoNext(s);
+        toBack();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.capture);
@@ -225,9 +227,10 @@ public final class CaptureActivity extends Activity implements
         findViewById(R.id.back).setOnClickListener(this);
         tv_btn_manual = findViewById(R.id.tv_btn_manual);
 
-        if (manualActivity != null) {
+        if (getIntent().getBooleanExtra(SHOW_MANUAL_VIEW, true)) {
             tv_btn_manual.setVisibility(View.VISIBLE);
         }
+
         instence = this;
 
         tv_scanStr = (TextView) findViewById(R.id.capture_scanStr);
@@ -237,6 +240,7 @@ public final class CaptureActivity extends Activity implements
         findViewById(R.id.tv_btn_manual).setOnClickListener(this);
 //        http = new MyHttp(this);
     }
+
 
     @SuppressWarnings("deprecation")
     @Override
@@ -349,7 +353,7 @@ public final class CaptureActivity extends Activity implements
     @Override
     protected void onDestroy() {
         inactivityTimer.shutdown();
-        instence=null;
+        instence = null;
         super.onDestroy();
     }
 
@@ -597,30 +601,17 @@ public final class CaptureActivity extends Activity implements
         } else if (i == R.id.back) {
             toBack();
         } else if (i == R.id.tv_ok) {
-            gotoNext(tv_scanStr.getText().toString());
+            toBack();
         } else if (i == R.id.tv_rescan) {
             viewfinderView.setIsDrawScanningLine(true);
             rescan();
         } else if (i == R.id.tv_btn_manual) {
-            if (manualActivity != null) {
-                startActivity(new Intent(CaptureActivity.this, manualActivity));
-            }
-            CaptureActivity.this.finish();
+            manual();
         } else {
         }
 
     }
 
-    /**
-     * 返回信息录入界面
-     */
-    public void gotoNext(String s) {
-        if (scannerResultActivity != null) {
-            Intent intent = new Intent(CaptureActivity.this, scannerResultActivity);
-            CaptureActivity.this.startActivity(intent);
-        }
-        CaptureActivity.this.finish();
-    }
 
     public void rescan() {
         findViewById(R.id.layout_btns_bottom_changeMode).setVisibility(View.VISIBLE);
@@ -631,10 +622,16 @@ public final class CaptureActivity extends Activity implements
     }
 
     private void toBack() {
-        if (backActivity != null) {
-            Intent intent = new Intent(CaptureActivity.this, backActivity);
-            startActivity(intent);
-        }
+        Intent intent = new Intent();
+        intent.putExtra(SCAN_CODE, codeMsg);
+        setResult(RESULT_OK, intent);
+        CaptureActivity.this.finish();
+    }
+
+    private void manual() {
+        Intent intent = new Intent();
+        intent.putExtra(NEED_MANUAL, true);
+        setResult(RESULT_OK, intent);
         CaptureActivity.this.finish();
     }
 
@@ -644,23 +641,12 @@ public final class CaptureActivity extends Activity implements
     }
 
 
-    static Class<?> scannerResultActivity;
-    static Class<?> manualActivity;
-    static Class<?> backActivity;
     private static String codeMsg;
     private static int topbarColor;
+    public final static String SHOW_MANUAL_VIEW = "show_manual_text_view";
+    public final static String SCAN_CODE = "scan_code_readed";
+    public final static String NEED_MANUAL = "scan_code_need_manual";
 
-    public static void setScannerResultActivity(Class<?> scannerResultActivity) {
-        CaptureActivity.scannerResultActivity = scannerResultActivity;
-    }
-
-    public static void setManualActivity(Class<?> manualActivity) {
-        CaptureActivity.manualActivity = manualActivity;
-    }
-
-    public static void setBackActivity(Class<?> backActivity) {
-        CaptureActivity.backActivity = backActivity;
-    }
 
     public static void setTopbarColor(int topbarColor) {
         CaptureActivity.topbarColor = topbarColor;
@@ -674,7 +660,6 @@ public final class CaptureActivity extends Activity implements
     public void onBackPressed() {
         toBack();
     }
-
 
 
 }
