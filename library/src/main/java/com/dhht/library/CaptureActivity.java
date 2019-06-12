@@ -599,7 +599,7 @@ public final class CaptureActivity extends Activity implements
                 isFlashlightOpen = true;
             }
         } else if (i == R.id.back) {
-            toBack();
+            CaptureActivity.this.finish();
         } else if (i == R.id.tv_ok) {
             toBack();
         } else if (i == R.id.tv_rescan) {
