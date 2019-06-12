@@ -365,7 +365,7 @@ public final class CaptureActivity extends Activity implements
                     restartPreviewAfterDelay(0L);
                     return true;
                 } else {
-                    toBack();
+                    finish();
                 }
                 break;
             case KeyEvent.KEYCODE_FOCUS:
