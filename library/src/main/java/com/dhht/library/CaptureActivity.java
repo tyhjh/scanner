@@ -658,7 +658,7 @@ public final class CaptureActivity extends Activity implements
 
     @Override
     public void onBackPressed() {
-        toBack();
+        CaptureActivity.this.finish();
     }
 
 
